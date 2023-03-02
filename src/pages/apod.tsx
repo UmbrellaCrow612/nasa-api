@@ -14,14 +14,31 @@ export default function Page() {
               <p className="animate-bounce">Loading image ...</p>
             </div>
           ) : (
-            <Link href={apodData?.hdurl || "/"}>
-              <img
-                src={apodData?.hdurl || apodData?.url}
-                alt={apodData?.title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </Link>
+            <>
+              {apodData?.media_type === "image" && (
+                <>
+                  {" "}
+                  <Link href={apodData?.hdurl || "/"}>
+                    <img
+                      src={apodData?.hdurl || apodData?.url}
+                      alt={apodData?.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </Link>
+                </>
+              )}
+
+              {apodData?.media_type === "video" && (
+                <video
+                  src={apodData.url}
+                  controls
+                  className="w-full h-full aspect-video"
+                >
+                  Not supported
+                </video>
+              )}
+            </>
           )}
           {isError && <p>Error occurred</p>}
         </div>
