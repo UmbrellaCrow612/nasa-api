@@ -20,6 +20,14 @@ export default function Page() {
     }
   }
 
+  function clearForm(e: FormEvent) {
+    e.preventDefault();
+    setLatitude("");
+    setLongitude("");
+    setDimension("");
+    setDate("");
+  }
+
   return (
     <>
       <section className="h-[50rem] gap-4 flex-col w-full flex items-center justify-center ">
@@ -99,6 +107,10 @@ export default function Page() {
 
           <button type="submit" className="btn">
             Search
+          </button>
+
+          <button className="btn btn-outline" onClick={(e) => clearForm(e)}>
+            Clear
           </button>
         </form>
       </section>
