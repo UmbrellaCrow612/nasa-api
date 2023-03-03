@@ -3,9 +3,12 @@ import NavLink from "./NavLink";
 
 export default function Navigation() {
   return (
-    <nav className="navbar bg-base-100 justify-between">
+    <nav className="justify-between navbar bg-base-100">
       <Logo />
-      <NavLink href="/apod">APOD</NavLink>
+      <div className="flex gap-4">
+        <NavLink href="/earth">earth</NavLink>
+        <NavLink href="/apod">APOD</NavLink>
+      </div>
     </nav>
   );
 }
