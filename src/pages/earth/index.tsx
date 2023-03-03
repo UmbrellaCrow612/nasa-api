@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function Page() {
   const [latitude, setLatitude] = useState<string>();
@@ -9,14 +9,23 @@ export default function Page() {
 
   const router = useRouter();
 
-  function searchEarth() {}
+  function searchEarth(e: FormEvent) {
+    e.preventDefault();
+    if (latitude != "" && longitude != "" && dimension != "" && date != "") {
+      router.push(
+        `/earth//search?latitude=${latitude}&longitude=${longitude}&dimension=${dimension}&date=${date}`
+      );
+    } else {
+      alert("Error searching");
+    }
+  }
 
   return (
     <>
       <section className="h-[50rem] gap-4 flex-col w-full flex items-center justify-center ">
         <h1 className="text-4xl font-bold">Search the earth</h1>
         <form
-          onSubmit={() => searchEarth()}
+          onSubmit={(e) => searchEarth(e)}
           className="flex flex-col items-center justify-center w-3/4 gap-5 h-3/4"
         >
           <div className="w-full max-w-xs form-control">
@@ -84,6 +93,7 @@ export default function Page() {
               className="w-full max-w-xs input input-bordered"
               value={date}
               onChange={(e) => setDate(e.target.value)}
+              max={new Date().toISOString().split("T")[0]}
             />
           </div>
 
